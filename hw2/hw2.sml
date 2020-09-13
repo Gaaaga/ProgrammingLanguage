@@ -141,3 +141,27 @@ fun officiate_challenge (cards,moves,goal) =
   game_on(cards,moves,[])
   end
 
+fun careful_player (card_list,goal) =
+  let fun check_card(value,held) =
+          case held of
+            [] => NONE
+          | hd::tl => if card_value(hd) = value then SOME hd else check_card(value,tl)
+  in
+    let fun loop(left_cards,held) = 
+    if score(held,goal) = 0
+    then []
+    else if goal-sum_cards(held) > 10 
+      then case left_cards of 
+            hd::tl => Draw::loop(tl,hd::held)
+          | [] => [Draw]
+      else case (left_cards,held) of
+          (hd::tl,hd'::tl') => if sum_cards(hd::held) > goal 
+                    then case check_card(sum_cards(hd::held)-goal,held) of
+                      NONE => Discard hd'::loop(left_cards,tl')
+                    | SOME i =>Discard i::[ Draw ]
+                    else Draw::loop(tl,hd::held)
+          | ([],_) => []
+    in
+    loop(card_list,[])
+    end
+  end

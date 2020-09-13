@@ -58,3 +58,6 @@ val test15 = officiate_challenge ([(Clubs,Ace),(Spades,Ace),(Clubs,Ace),(Hearts,
                         [Draw,Draw,Draw,Draw,Draw],
                         34)
              = 0
+val test16_1 = careful_player([(Clubs,Num 1),(Spades,Num 2),(Hearts,Num 3),(Hearts,Jack)],13) = [Draw,Draw,Draw,Discard (Hearts,Num 3),Draw]
+val test16_2 = careful_player([(Clubs,Num 1),(Spades,Num 2),(Hearts,Num 3),(Hearts,Jack)],14) = [Draw,Draw,Draw,Discard (Spades,Num 2),Draw]
+val test16_3 = careful_player([(Clubs,Num 1),(Spades,Num 2),(Hearts,Num 3),(Hearts,Jack)],18) = [Draw,Draw,Draw,Draw]
