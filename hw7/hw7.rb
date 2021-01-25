@@ -351,7 +351,7 @@ class Shift < GeometryExpression
     Shift.new(@dx,@dy,Shift.new(dlx,dly))
   end
   def eval_prog env 
-    e.shift(@dx,@dy)
+    e.eval_prog(env).shift(@dx,@dy)
   end
   def preprocess_prog
     Shift.new(@dx,@dy,e.preprocess_prog())
